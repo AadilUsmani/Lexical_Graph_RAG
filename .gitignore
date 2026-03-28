@@ -1,30 +1,117 @@
-# Python
+# Byte-compiled / optimized / DLL files
 __pycache__/
-*.py[cod]
-*.pyo
-*.pyd
+*.py[codz]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+share/python-wheels/
 *.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+# Installer logs
+pip-log.txt
+pip-delete-this-directory.txt
+
+# Unit test / coverage reports
+htmlcov/
+.tox/
+.nox/
+.coverage
+.coverage.*
+.cache
+nosetests.xml
+coverage.xml
+*.cover
+*.py.cover
+.hypothesis/
 .pytest_cache/
-.mypy_cache/
+cover/
 
-# Virtual environments
-.venv/
-venv/
+# Translations
+*.mo
+*.pot
 
-# Environment/secrets
+# Frameworks
+local_settings.py
+db.sqlite3
+db.sqlite3-journal
+instance/
+.webassets-cache
+.scrapy
+
+# Docs/build helpers
+docs/_build/
+.pybuilder/
+target/
+/site
+
+# Notebook / shells
+.ipynb_checkpoints/
+profile_default/
+ipython_config.py
+
+# Environments & secrets
 .env
+.envrc
+.venv/
+env/
+venv/
+ENV/
+env.bak/
+venv.bak/
 
-# OS/editor
-.DS_Store
-.vscode/
+# Type/checker caches
+.mypy_cache/
+.dmypy.json
+dmypy.json
+.pyre/
+.pytype/
+.ruff_cache/
+cython_debug/
+
+# IDE/editor
 .idea/
+.vscode/
+.spyderproject
+.spyproject
+.ropeproject
 
-# Logs and local run artifacts
+# Misc tools
+.pypirc
+.abstra/
+.cursorignore
+.cursorindexingignore
+marimo/_static/
+marimo/_lsp/
+__marimo__/
+__pypackages__/
+.pdm-python
+.pdm-build/
+.pixi/
+
+# Local project artifacts
 logs/
 *.log
-
-# Local databases and indexes
 chroma_db/
-
-# Notebook checkpoints
-.ipynb_checkpoints/
