@@ -189,6 +189,13 @@ def calculate_cumulative_recall(
 # ---------------------------------------------------------------------------
 # Plot 6: Context Window Composition (Signal-to-Noise Ratio)
 # ---------------------------------------------------------------------------
+import logging
+import matplotlib.pyplot as plt
+from pathlib import Path
+
+# Ensure logger is set up if not already
+log = logging.getLogger(__name__)
+
 def plot_signal_to_noise(
     graph_records: list[dict] | None = None,
     vector_records: list[dict] | None = None,
@@ -197,86 +204,87 @@ def plot_signal_to_noise(
 ) -> tuple[plt.Figure, plt.Axes]:
     """
     Plot the composition of context windows showing Signal vs Noise ratio.
-    
-    This proves "Triplet Atomicity" - that graphs strip away linguistic fluff
-    and provide higher signal-to-noise ratio compared to dense paragraph chunks.
-    
-    Args:
-        graph_records: GraphRAG evaluation records (optional, will use defaults).
-        vector_records: Vector RAG evaluation records (optional, will use defaults).
-        out_dir: Output directory for figure.
-        dpi: Resolution for PNG output.
-    
-    Returns:
-        (fig, ax) tuple.
     """
-    fig, ax = plt.subplots(figsize=(7, 6))
+    # Slightly taller figure to accommodate the legend/title spacing
+    fig, ax = plt.subplots(figsize=(7, 6.5))
     
     architectures = ['Baseline Vector RAG\n(Dense Chunks)', 
                     'Stratified GraphRAG\n(Atomic Triplets)']
     
-    # If data is provided, calculate actual SNR; otherwise use estimates
+    # Logic for actual vs estimated SNR
     if vector_records and graph_records:
+        # Assuming calculate_snr is defined elsewhere in your scope
         vector_signal, vector_noise = calculate_snr(vector_records)
         graph_signal, graph_noise = calculate_snr(graph_records)
     else:
-        # Illustrative percentages based on token analysis
-        # Vector RAG: Most tokens are irrelevant context
         vector_signal, vector_noise = 18, 82
-        # GraphRAG: Most tokens are directly relevant triplets
         graph_signal, graph_noise = 85, 15
         log.info("Using default Signal-to-Noise estimates")
     
     signal_percentage = [vector_signal, graph_signal]
     noise_percentage = [vector_noise, graph_noise]
     
-    width = 0.5
+    width = 0.55 # Slightly wider bars for better text fitting
     
-    # Plot stacked bars (noise first, then signal on top)
+    # Plot stacked bars with white edge separators for cleaner design
     bars_noise = ax.bar(architectures, noise_percentage, width,
-                        label='Irrelevant Context (Noise/Bloat)', 
-                        color='#bdc3c7')
+                        label='Irrelevant Context (Noise)', 
+                        color='#bdc3c7', edgecolor='white', linewidth=1.5)
+                        
     bars_signal = ax.bar(architectures, signal_percentage, width,
                          bottom=noise_percentage,
                          label='Relevant Facts (Signal)', 
-                         color='#8e44ad')
+                         color='#8e44ad', edgecolor='white', linewidth=1.5)
     
-    # Add percentage labels
+    # Add percentage labels with threshold checks to prevent squished text
     for i in range(len(architectures)):
-        # Noise label (centered in noise section)
-        ax.text(i, noise_percentage[i] / 2, f"{noise_percentage[i]}%",
-                ha='center', va='center', color='black', 
-                fontsize=12, fontweight='bold')
+        # Noise label
+        if noise_percentage[i] >= 5: # Only label if big enough to fit
+            ax.text(i, noise_percentage[i] / 2, f"{noise_percentage[i]}%",
+                    ha='center', va='center', color='black', 
+                    fontsize=12, fontweight='bold')
         
-        # Signal label (centered in signal section)
-        signal_center = noise_percentage[i] + signal_percentage[i] / 2
-        ax.text(i, signal_center, f"{signal_percentage[i]}%",
-                ha='center', va='center', color='white', 
-                fontsize=12, fontweight='bold')
+        # Signal label
+        if signal_percentage[i] >= 5:
+            signal_center = noise_percentage[i] + (signal_percentage[i] / 2)
+            ax.text(i, signal_center, f"{signal_percentage[i]}%",
+                    ha='center', va='center', color='white', 
+                    fontsize=12, fontweight='bold')
     
-    # Styling
-    ax.set_ylabel('Context Window Composition (%)', fontsize=12)
+    # Styling and Labels
+    ax.set_ylabel('Context Window Composition (%)', fontsize=12, fontweight='medium')
+    
+    # Increased padding to prevent overlap with the legend
     ax.set_title('Triplet Atomicity vs. Context Bloat\n(Signal-to-Noise Ratio)',
-                 fontsize=14, fontweight='bold', pad=10)
+                 fontsize=14, fontweight='bold', pad=35)
+                 
     ax.set_ylim(0, 105)
-    ax.legend(loc="upper right", bbox_to_anchor=(1, 1.15),
-             frameon=True, framealpha=0.95, edgecolor='#cccccc')
+    
+    # Repositioned Legend: Top center, 2 columns, frame disabled for cleaner look
+    ax.legend(loc="lower center", bbox_to_anchor=(0.5, 1.01),
+              ncol=2, frameon=False, fontsize=11)
+              
+    # Despine top and right
     ax.spines['top'].set_visible(False)
     ax.spines['right'].set_visible(False)
-    ax.grid(True, alpha=0.3, axis='y')
     
-    # Save figure
+    # Push grid strictly behind the bars
+    ax.set_axisbelow(True)
+    ax.grid(True, alpha=0.3, axis='y', linestyle='--')
+    
+    # Layout and Save
     out_dir.mkdir(parents=True, exist_ok=True)
-    plt.tight_layout()
+    
+    # Apply tight_layout directly to the figure object before saving
+    fig.tight_layout()
     
     for fmt in ['png', 'pdf']:
         out_path = out_dir / f"plot_6_signal_to_noise.{fmt}"
         fig.savefig(out_path, dpi=dpi if fmt == 'png' else None,
                    bbox_inches='tight', format=fmt)
-        log.info("Saved → %s", out_path)
+        log.info(f"Saved → {out_path}")
     
     return fig, ax
-
 
 def calculate_snr(records: list[dict]) -> tuple[int, int]:
     """
@@ -300,11 +308,11 @@ def calculate_snr(records: list[dict]) -> tuple[int, int]:
 # Main Entry Point
 # ---------------------------------------------------------------------------
 def main() -> None:
-    """Generate supplementary plots (5 and 6)."""
+    """Generate the Signal-to-Noise Ratio plot (Plot 6)."""
     init_plotting_style()
     
     log.info("=" * 60)
-    log.info("Generating Supplementary Academic Plots")
+    log.info("Generating Academic Plot: Signal-to-Noise")
     log.info("=" * 60)
     
     # Try to load actual evaluation data
@@ -312,14 +320,6 @@ def main() -> None:
     vector_data = load_evaluation_data("vector_evaluation_results.json")
     
     out_dir = Path("figures")
-    
-    # Generate Plot 5: Cumulative Recall
-    log.info("\nRendering Plot 5 — Cumulative Recall Curve ...")
-    plot_cumulative_recall(
-        graph_records=graph_data if graph_data else None,
-        vector_records=vector_data if vector_data else None,
-        out_dir=out_dir
-    )
     
     # Generate Plot 6: Signal-to-Noise Ratio
     log.info("\nRendering Plot 6 — Signal-to-Noise Ratio ...")
@@ -330,10 +330,10 @@ def main() -> None:
     )
     
     log.info("=" * 60)
-    log.info("Successfully saved Plot 5 and Plot 6 to ./figures/")
+    log.info("Successfully saved Plot 6 to ./figures/")
     log.info("=" * 60)
+    
+    # Display the plot
     plt.show()
-
-
 if __name__ == "__main__":
     main()

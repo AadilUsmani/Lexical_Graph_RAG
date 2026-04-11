@@ -1,0 +1,137 @@
+\relax 
+\providecommand\hyper@newdestlabel[2]{}
+\providecommand\HyField@AuxAddToFields[1]{}
+\providecommand\HyField@AuxAddToCoFields[2]{}
+\citation{basel,gdpr,sr117,bcbs239,iso27001,pci40}
+\citation{lewis2020rag,karpukhin2020dpr,colbert2020,splade2021,atlas2022}
+\citation{bender2021stochastic}
+\citation{sec10k,projectnotes}
+\citation{lewis2020rag}
+\citation{karpukhin2020dpr,colbert2020,splade2021,hyde2023}
+\citation{edge2024graphrag}
+\citation{attention2017,bert2019,roberta2019,sbert2019,t52020,instructiontuning2022}
+\@writefile{toc}{\contentsline {section}{\numberline {I}Introduction}{1}{section.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {II}Related Work}{1}{section.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-A}}A Taxonomy of RAG Systems}{1}{subsection.2.1}\protected@file@percent }
+\citation{liu2024lostmiddle}
+\citation{truthfulqa2022,ragas2023,hotpotqa2018,fever2018}
+\citation{edgargraph,finkgsurvey,opencyc2018,finbert2020}
+\citation{neo4jmanual,cypher2018}
+\citation{gpt4report,instructiontuning2022}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-B}}Hallucination, Context Position, and Evidence Dilution}{2}{subsection.2.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {II-C}}Knowledge Graphs for Financial Documents}{2}{subsection.2.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {III}Architectural Structure}{2}{section.3}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces High level system schematic. The diagram summarizes the movement from query parsing to entity extraction, structural traversal, and grounded answer synthesis.}}{2}{figure.caption.2}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig4_overview_architecture}{{1}{2}{High level system schematic. The diagram summarizes the movement from query parsing to entity extraction, structural traversal, and grounded answer synthesis}{figure.caption.2}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-A}}Document Ingestion and Preprocessing}{2}{subsection.3.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-B}}Chunking Strategy: Semantic vs. Structural}{2}{subsection.3.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-C}}Triplet Extraction and Ontology}{2}{subsection.3.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-D}}Entity Resolution and Canonicalization}{2}{subsection.3.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {III-E}}Implementation: Neo4j and LLM Configuration}{2}{subsection.3.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces End to end pipeline view. Left, conventional vector centric retrieval injects prose chunks into the generator context without structural constraint. Right, the proposed Lexical Structural pipeline enforces lexical node anchoring, bounded traversal with degree caps, and explicit refusal before synthesis. Each generated claim is backed by a \texttt  {source\_chunk} pointer.}}{3}{figure.caption.3}\protected@file@percent }
+\newlabel{fig8_pipeline_main}{{2}{3}{End to end pipeline view. Left, conventional vector centric retrieval injects prose chunks into the generator context without structural constraint. Right, the proposed Lexical Structural pipeline enforces lexical node anchoring, bounded traversal with degree caps, and explicit refusal before synthesis. Each generated claim is backed by a \texttt {source\_chunk} pointer}{figure.caption.3}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Signal to noise comparison between paragraph retrieval and triplet atomic retrieval. Atomic evidence preserves a higher share of relevant tokens and lowers prompt overhead across query categories.}}{3}{figure.caption.4}\protected@file@percent }
+\newlabel{fig6_signal_noise}{{3}{3}{Signal to noise comparison between paragraph retrieval and triplet atomic retrieval. Atomic evidence preserves a higher share of relevant tokens and lowers prompt overhead across query categories}{figure.caption.4}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Structured financial knowledge graph topology used during deterministic traversal. Nodes represent canonical entities, obligations, risk factors, and metrics. Directed edges represent auditable typed predicates linked to source chunks.}}{3}{figure.caption.5}\protected@file@percent }
+\newlabel{fig7_structured_kg}{{4}{3}{Structured financial knowledge graph topology used during deterministic traversal. Nodes represent canonical entities, obligations, risk factors, and metrics. Directed edges represent auditable typed predicates linked to source chunks}{figure.caption.5}{}}
+\citation{angles2018propertygraphs}
+\citation{msmarco2016,trec2020}
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Robust architecture view. The control path emphasizes ingestion discipline, canonicalization, deterministic traversal, provenance preservation, and refusal safe generation.}}{4}{figure.caption.6}\protected@file@percent }
+\newlabel{fig10_robust_architecture}{{5}{4}{Robust architecture view. The control path emphasizes ingestion discipline, canonicalization, deterministic traversal, provenance preservation, and refusal safe generation}{figure.caption.6}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {IV}Formalizing Deterministic Retrieval}{4}{section.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-A}}Graph Definition and Provenance Mapping}{4}{subsection.4.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-B}}Extraction Objective}{4}{subsection.4.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-C}}Deterministic Path Requirement}{4}{subsection.4.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-D}}Mega Node Mitigation and Stratified Scoring}{4}{subsection.4.4}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-E}}Retrieval Algorithm}{4}{subsection.4.5}\protected@file@percent }
+\@writefile{loa}{\contentsline {algorithm}{\numberline {1}{\ignorespaces Deterministic Lexical Structural Retrieval}}{4}{algorithm.1}\protected@file@percent }
+\newlabel{alg:deterministic_retrieval}{{1}{4}{Deterministic Lexical Structural Retrieval}{algorithm.1}{}}
+\citation{angles2018propertygraphs,robinson2015graphdb}
+\citation{monoT52020,rankgpt2023,selfrag2023}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {IV-F}}Evaluation Metrics}{5}{subsection.4.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {V}Performance, Ablation, and Failure Analysis}{5}{section.5}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-A}}Benchmark Design and Query Categories}{5}{subsection.5.1}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {I}{\ignorespaces Benchmark Query Category Breakdown}}{5}{table.caption.7}\protected@file@percent }
+\newlabel{tab:query_cats}{{I}{5}{Benchmark Query Category Breakdown}{table.caption.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-B}}Latency and Throughput}{5}{subsection.5.2}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces Latency and hallucination trade off for financial retrieval pipelines. The proposed method accepts moderate latency overhead to reduce unsupported generation to zero on unretrieved context.}}{5}{figure.caption.8}\protected@file@percent }
+\newlabel{fig_latency_tradeoff}{{6}{5}{Latency and hallucination trade off for financial retrieval pipelines. The proposed method accepts moderate latency overhead to reduce unsupported generation to zero on unretrieved context}{figure.caption.8}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-C}}Ablation Study}{5}{subsection.5.3}\protected@file@percent }
+\@writefile{lot}{\contentsline {table}{\numberline {II}{\ignorespaces Ablation Results on the 35 Query Benchmark}}{5}{table.caption.9}\protected@file@percent }
+\newlabel{tab:ablation}{{II}{5}{Ablation Results on the 35 Query Benchmark}{table.caption.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-D}}Precision vs. Hop Complexity}{5}{subsection.5.4}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Precision degradation under increasing query complexity. Vector only retrieval degrades more sharply at higher hop complexity than lexical structural retrieval.}}{5}{figure.caption.10}\protected@file@percent }
+\newlabel{fig1}{{7}{5}{Precision degradation under increasing query complexity. Vector only retrieval degrades more sharply at higher hop complexity than lexical structural retrieval}{figure.caption.10}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces System behavior across direct, comparative, and multi hop query categories. Refusal rises where lexical bridging or multi anchor traversal is harder to satisfy.}}{5}{figure.caption.11}\protected@file@percent }
+\newlabel{fig2}{{8}{5}{System behavior across direct, comparative, and multi hop query categories. Refusal rises where lexical bridging or multi anchor traversal is harder to satisfy}{figure.caption.11}{}}
+\citation{liu2024lostmiddle,openaipricing2026,anthropicpricing2026}
+\citation{ieeeeadd,kearns2019ethical}
+\citation{sr117}
+\citation{gdpr,nistairmf,euaiact2024}
+\citation{euaiact2024,occaiprinciples,fcaai2024}
+\citation{ragas2023}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces Cumulative recall as a function of retrieval depth $K$. The lexical structural pipeline accumulates evidence faster at low $K$ than the vector baseline.}}{6}{figure.caption.12}\protected@file@percent }
+\newlabel{fig5_cumulative_recall}{{9}{6}{Cumulative recall as a function of retrieval depth $K$. The lexical structural pipeline accumulates evidence faster at low $K$ than the vector baseline}{figure.caption.12}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-E}}Failure Mode Taxonomy}{6}{subsection.5.5}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces Lexical gap example. The semantic intent is valid, but the surface form differs from the canonical graph label, so anchor resolution fails and the system correctly refuses.}}{6}{figure.caption.13}\protected@file@percent }
+\newlabel{fig3}{{10}{6}{Lexical gap example. The semantic intent is valid, but the surface form differs from the canonical graph label, so anchor resolution fails and the system correctly refuses}{figure.caption.13}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {V-F}}Token Efficiency Analysis}{6}{subsection.5.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VI}Discussion on Regulatory Compliance}{6}{section.6}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-A}}Explainability in Analyst Workflows}{6}{subsection.6.1}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-B}}Alignment with SR 11-7 and GDPR}{6}{subsection.6.2}\protected@file@percent }
+\@writefile{toc}{\contentsline {subsection}{\numberline {\mbox  {VI-C}}High Risk Governance Alignment}{6}{subsection.6.3}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VII}Threats to Validity}{6}{section.7}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {VIII}Future Research}{6}{section.8}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {IX}Conclusion}{6}{section.9}\protected@file@percent }
+\bibcite{basel}{1}
+\bibcite{gdpr}{2}
+\bibcite{sr117}{3}
+\bibcite{bcbs239}{4}
+\bibcite{iso27001}{5}
+\bibcite{pci40}{6}
+\bibcite{lewis2020rag}{7}
+\bibcite{karpukhin2020dpr}{8}
+\bibcite{colbert2020}{9}
+\bibcite{splade2021}{10}
+\bibcite{atlas2022}{11}
+\bibcite{bender2021stochastic}{12}
+\bibcite{sec10k}{13}
+\bibcite{projectnotes}{14}
+\bibcite{hyde2023}{15}
+\bibcite{edge2024graphrag}{16}
+\bibcite{attention2017}{17}
+\bibcite{bert2019}{18}
+\bibcite{roberta2019}{19}
+\bibcite{sbert2019}{20}
+\bibcite{t52020}{21}
+\bibcite{instructiontuning2022}{22}
+\bibcite{liu2024lostmiddle}{23}
+\bibcite{truthfulqa2022}{24}
+\bibcite{ragas2023}{25}
+\bibcite{hotpotqa2018}{26}
+\bibcite{fever2018}{27}
+\bibcite{edgargraph}{28}
+\bibcite{finkgsurvey}{29}
+\bibcite{opencyc2018}{30}
+\bibcite{finbert2020}{31}
+\bibcite{neo4jmanual}{32}
+\bibcite{cypher2018}{33}
+\bibcite{gpt4report}{34}
+\bibcite{angles2018propertygraphs}{35}
+\bibcite{msmarco2016}{36}
+\bibcite{trec2020}{37}
+\bibcite{robinson2015graphdb}{38}
+\bibcite{monoT52020}{39}
+\bibcite{rankgpt2023}{40}
+\bibcite{selfrag2023}{41}
+\bibcite{openaipricing2026}{42}
+\bibcite{anthropicpricing2026}{43}
+\bibcite{ieeeeadd}{44}
+\bibcite{kearns2019ethical}{45}
+\bibcite{nistairmf}{46}
+\bibcite{euaiact2024}{47}
+\bibcite{occaiprinciples}{48}
+\bibcite{fcaai2024}{49}
+\@writefile{toc}{\contentsline {section}{References}{7}{section*.14}\protected@file@percent }
+\gdef \@abspage@last{7}
